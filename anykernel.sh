@@ -20,6 +20,7 @@ supported.patchlevels=
 
 # shell variables
 block=/dev/block/platform/13520000.ufs/by-name/boot;
+dtboblock=/dev/block/platform/13520000.ufs/by-name/dtbo;
 is_slot_device=0;
 ramdisk_compression=auto;
 
