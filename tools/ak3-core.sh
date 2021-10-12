@@ -435,7 +435,7 @@ flash_dtbo() {
       abort "  • dtbo partition could not be found!";
     fi;
     blockdev --setrw $dtboblock 2>/dev/null;
-    ui_print " " "$dtboblock";
+    ui_print "  • Flashing dtbo image.";
     if [ -f "$bin/flash_erase" -a -f "$bin/nandwrite" ]; then
       $bin/flash_erase $dtboblock 0 0;
       $bin/nandwrite -p $dtboblock $dtbo;
