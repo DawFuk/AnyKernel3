@@ -68,7 +68,7 @@ split_boot() {
   local dumpfail;
 
   if [ ! -e "$(echo $block | cut -d\  -f1)" ]; then
-    abort "  • Invalid partition.";
+    abort "  • Invalid partition!";
   fi;
   if [ "$(echo $block | grep ' ')" ]; then
     block=$(echo $block | cut -d\  -f1);
@@ -134,7 +134,7 @@ split_boot() {
   fi;
 
   if [ $? != 0 -o "$dumpfail" ]; then
-    abort "  • Dumping/splitting image failed.";
+    abort "  • Dumping/splitting image failed!";
   fi;
   cd $home;
 }
@@ -155,7 +155,7 @@ unpack_ramdisk() {
   if [ -f ramdisk.cpio ]; then
     comp=$($bin/magiskboot decompress ramdisk.cpio 2>&1 | grep -v 'raw' | sed -n 's;.*\[\(.*\)\];\1;p');
   else
-    abort "  • No ramdisk found to unpack.";
+    abort "  • No ramdisk found to unpack!";
   fi;
   if [ "$comp" ]; then
     mv -f ramdisk.cpio ramdisk.cpio.$comp;
@@ -181,9 +181,9 @@ unpack_ramdisk() {
 }
 ### dump_boot (dump and split image, then extract ramdisk)
 dump_boot() {
-  ui_print "  • Unpacking boot image";
+  ui_print "  • Unpacking boot image.";
   split_boot;
-  ui_print "  • Unpacking ramdisk";
+  ui_print "  • Unpacking ramdisk.";
   unpack_ramdisk;
 }
 ###
@@ -241,7 +241,7 @@ repack_ramdisk() {
 flash_boot() {
   local varlist i kernel ramdisk fdt cmdline comp part0 part1 nocompflag signfail pk8 cert avbtype;
 
-  ui_print "  • Repacking boot image";
+  ui_print "  • Repacking boot image.";
 
   cd $split_img;
   if [ -f "$bin/mkimage" ]; then
@@ -784,7 +784,7 @@ setup_ak() {
       if [ "$target" ]; then
         block=$(ls $target 2>/dev/null);
       else
-        abort "  • Unable to determine $block partition.";
+        abort "  • Unable to determine $block partition!";
       fi;
     ;;
     *)
